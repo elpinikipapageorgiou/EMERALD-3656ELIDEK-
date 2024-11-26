@@ -1,4 +1,4 @@
-# FCM-GA
+# FCM-ELM
 
 # Usage
 
