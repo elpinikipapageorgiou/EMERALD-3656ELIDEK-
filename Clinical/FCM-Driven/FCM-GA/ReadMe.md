@@ -12,20 +12,23 @@ dataset=pd.read_excel("dataset.xlsx", engine='openpyxl')
 If suggested weights are provided for the initialization of interconnections among concepts, the 'suggested_weights' variable should be initialized as below
 An example of an excel with initialized interconnections is provided in /assets folder
 ```
-# suggested_weights = pd.read_excel("suggested_weights.xlsx", engine='openpyxl')
+# excel_file_path = "suggested_weights.xlsx"
 ```
 
 
 or else, the 'suggested_weights' variable should be equal to 'None' as it is.
 ```
-suggested_weights=None
+excel_file_path=None
 ```
-To modify the number of particles and training epochs, adjust the following parameters accordingly
+To modify the number of population and num generations, and mutation rate, adjust the following parameters accordingly
 ```
-num_particles = 40
+pop_size= 100 
 
-#Define number of epochs
-epoch=30
+#define number of generations
+num_generations = 100
+
+#define mutation rate
+mutation_rate = 0.1
 ```
 To alter the number of folds for k-fold cross validation, adjust the following parameter
 ```
