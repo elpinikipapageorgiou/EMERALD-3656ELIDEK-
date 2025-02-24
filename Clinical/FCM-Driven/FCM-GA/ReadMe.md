@@ -4,6 +4,36 @@
 
 FCM-GA provides a transparent view of interconnections and their contributions to FCM's predictive accuracy.
 
+The dataset should be initialized here:
+```
+dataset=pd.read_excel("dataset.xlsx", engine='openpyxl')
+```
+
+If suggested weights are provided for the initialization of interconnections among concepts, the 'suggested_weights' variable should be initialized as below
+An example of an excel with initialized interconnections is provided in /assets folder
+```
+# suggested_weights = pd.read_excel("suggested_weights.xlsx", engine='openpyxl')
+```
+
+
+or else, the 'suggested_weights' variable should be equal to 'None' as it is.
+```
+suggested_weights=None
+```
+To modify the number of particles and training epochs, adjust the following parameters accordingly
+```
+num_particles = 40
+
+#Define number of epochs
+epoch=30
+```
+To alter the number of folds for k-fold cross validation, adjust the following parameter
+```
+#perform k-fold cross validation 
+#Define K (num_folds) for k-fold cross validation
+num_folds=10
+```
+
 To use FCM-GA, utilize the following code block:
 
 ```
