@@ -20,12 +20,11 @@ or else, the 'suggested_weights' variable should be equal to 'None' as it is.
 ```
 suggested_weights=None
 ```
-To modify the number of particles and training epochs, adjust the following parameters accordingly
+To modify the number of learning rate, num_iterations, num_hidden_units, adjust the following parameters accordingly
 ```
-num_particles = 40
-
-#Define number of epochs
-epoch=30
+learning_rate = 0.01
+num_iterations = 20
+num_hidden_units=30
 ```
 To alter the number of folds for k-fold cross validation, adjust the following parameter
 ```
