@@ -19,15 +19,15 @@ class Particle:
                 for j, val in enumerate(row):
                     if arr[i][j] == "random":
                         arr[i][j]=random.uniform(-1, 1)
-                    if arr[i][j]=="-VS":
+                    if arr[i][j]=='"-VS"':
                         arr[i][j]=random.uniform(-1, -0.7)
                     if arr[i][j]=='"-S"':
                         arr[i][j]=random.uniform(-0.85, -0.5)
                     if arr[i][j] =='"-M"':
                         arr[i][j]=random.uniform(-0.65, -0.35)
-                    if arr[i][j] =="-W":
+                    if arr[i][j] =='"-W"':
                         arr[i][j]=random.uniform(-0.5, -0.15)
-                    if arr[i][j] =="-VW":
+                    if arr[i][j] =='"-VW"':
                         arr[i][j]=random.uniform(-0.3, 0)
 
                     if arr[i][j] =="VW":
