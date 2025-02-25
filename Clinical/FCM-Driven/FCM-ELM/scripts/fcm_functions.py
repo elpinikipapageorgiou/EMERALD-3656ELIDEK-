@@ -54,10 +54,11 @@ def FCM_ELM(initial_weights, num_iterations, input_features, num_hidden_units=30
             best_mse = current_mse
             best_weights = fcm_weights
         
-        if current_mse < 0.8:
-            break
+        
         
         best_weights = fcm_weights + learning_rate * ((training_real_output - elm_output) * elm_output * (1 - elm_output)).T @ input_features[:, :-1]
+        if current_mse < 0.8:
+            break
 
 
     np.fill_diagonal(best_weights, 0)
