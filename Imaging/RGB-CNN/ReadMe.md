@@ -153,6 +153,10 @@ Algorithm file: main.py is the RGB-CNN algorithm.
 -keras
 -tensorflow
 
+## Supervisor
+
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
+
 ## Contributors
 
 [Anna Feleki](https://emerald.uth.gr/personnel/)
