@@ -122,9 +122,6 @@ Algorithm file: main.py is the FCM algorithm tha integrates PSO into FCM learnin
 -matplotlib
 -networkx
 
-## Supervision
-[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
-
 ## Contributors
 
 [Anna Feleki](https://emerald.uth.gr/personnel/)
@@ -132,6 +129,9 @@ Algorithm file: main.py is the FCM algorithm tha integrates PSO into FCM learnin
 [Ioannis Apostolopoulos](https://emerald.uth.gr/personnel/)
 [Nikolaos Papandrianos](https://emerald.uth.gr/personnel/)
 [Serafeim Moustakidis](https://emerald.uth.gr/personnel/)
+
+## Supervisor
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
 
 ## Citation
 
