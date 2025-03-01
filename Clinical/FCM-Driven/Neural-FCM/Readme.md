@@ -13,9 +13,10 @@ To use this project you must to install the packages of **requirements.txt** fil
 
 The python script *inference.py* provides the code for loading the Neural-FCM model and the CAD sub-dataset. After loading, the data preparation is performed, with the corresponding preproccesing modules being provided. Finally, FCM inference is performed based on the model parameters, on the CAD dataset using the Neural-FCM models. 
 
-## Supervision
+## Supervisor
 [Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
 
 ## Contributor
 [Theodoros Tziolas](<ttziolas@uth.gr>)
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
 
