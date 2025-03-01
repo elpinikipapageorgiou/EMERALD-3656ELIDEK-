@@ -101,6 +101,10 @@ plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 -matplotlib
 -networkx
 
+## Supervisor
+
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
+
 ## Contributors
 
 [Anna Feleki](https://emerald.uth.gr/personnel/)
