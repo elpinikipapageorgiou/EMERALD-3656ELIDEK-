@@ -162,8 +162,8 @@ Algorithm file: main.py is the RGB-CNN algorithm.
 [Anna Feleki](https://emerald.uth.gr/personnel/)
 [Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
 [Ioannis Apostolopoulos](https://emerald.uth.gr/personnel/)
-[Nikolaos Papandrianos
-]()[Serafeim Moustakidis](https://emerald.uth.gr/personnel/)
+[Nikolaos Papandrianos](https://emerald.uth.gr/personnel/)
+[Serafeim Moustakidis](https://emerald.uth.gr/personnel/)
 
 ## Citation
 
