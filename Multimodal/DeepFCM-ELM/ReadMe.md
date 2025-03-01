@@ -146,6 +146,10 @@ combines the tabular data and CNN predictions to classify the imaging case studi
 -matplotlib
 -networkx
 
+## Supervisor
+
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
+
 ## Contributors
 
 [Anna Feleki](https://emerald.uth.gr/personnel/)
