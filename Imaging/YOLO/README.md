@@ -129,6 +129,14 @@ It is recomended to save the trained model and subset using either the `save` fu
 torch.save(model.state_dict(), 'vgg16_custom_dataset.pth')
 ```
 
+## Supervisor
+
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
+
+## Contributors
+
+[Agorastos Dimitrios Samaras](https://emerald.uth.gr/personnel/)
+
 ### Ablation Heat-maps
 
 An innovative approach for explaining YOLOv8 trained DL models can also be used. The `yolo_xai.py` script can be used to explain
