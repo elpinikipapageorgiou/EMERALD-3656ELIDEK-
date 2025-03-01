@@ -72,6 +72,10 @@ def DeepFCMx(dataset, num_dimensions, num_particles, maxiter):
 -matplotlib
 -networkx
 
+## Supervisor
+
+[Elpiniki Papageorgiou](https://emerald.uth.gr/personnel/)
+
 ## Contributors
 
 [Anna Feleki](https://emerald.uth.gr/personnel/)
