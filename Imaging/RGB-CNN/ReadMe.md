@@ -71,9 +71,11 @@ history = model.fit(train_generator,
 
 Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
 For NSCLC diagnosis with CT images
-![Plot](assets/Grad-CAMCTNSCLC.jpg)
+[https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html)
 For CAD diagnosis with Polar Maps images
 ![Plot](assets/Grad-CAMPolarMapsCAD.jpg)
+[https://www.mdpi.com/2076-3417/13/21/11953](https://www.mdpi.com/2076-3417/13/21/11953)
+
 
 ```
 for filename in os.listdir(data_dir):
