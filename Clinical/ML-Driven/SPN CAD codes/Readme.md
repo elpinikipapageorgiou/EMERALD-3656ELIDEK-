@@ -1,0 +1,1 @@
+Description: A set of python codes for classification of clinical data related to CAD and NSCLC. Focuses on comparing AI predictions with human-assigned labels using several plots (Reliability Curves, KS Statistic, Feature Importance) and Cohen’s Kappa statistic.
