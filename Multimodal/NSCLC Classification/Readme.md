@@ -1,0 +1,1 @@
+Description: A set of python codes implementing classification of Solitary Pulmonary Nodule representation images and clinical data using advanced Deep Learning models (Big Transfer, Convolution Mixer, EANet, FNet, Involutional Neural Networks, Perceivers, Vision Transformers).
