@@ -2,7 +2,7 @@
 
 # Usage
 
-FCMExpNLG provides factual explanations to justify the decision making process of FCMs.
+FCMExpNLG provides textual explanations to justify the decision making process of FCMs.
 
 The dataset should be initialized here:
 ```
