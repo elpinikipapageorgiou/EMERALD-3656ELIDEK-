@@ -2,63 +2,92 @@
 
 # Usage
 
-DeepFCMx provides a transparent view of interconnections and their contributions to FCM's predictive accuracy, with solely imaging data as input.
+DeepFCMx-GA provides a transparent view of interconnections and their contributions to FCM's predictive accuracy.
 
-To use DeepFCMx-GA, utilize the following code block:
+The dataset should be initialized here:
+```
+dataset=pd.read_excel("dataset.xlsx", engine='openpyxl')
+```
+
+If suggested weights are provided for the initialization of interconnections among concepts, the 'suggested_weights' variable should be initialized as below
+An example of an excel with initialized interconnections is provided in /assets folder
+```
+# excel_file_path = "suggested_weights.xlsx"
+```
+
+
+or else, the 'suggested_weights' variable should be equal to 'None' as it is.
+```
+excel_file_path=None
+```
+To modify the number of population and num generations, and mutation rate, adjust the following parameters accordingly
+```
+pop_size= 100 
+
+#define number of generations
+num_generations = 100
+
+#define mutation rate
+mutation_rate = 0.1
+```
+To alter the number of folds for k-fold cross validation, adjust the following parameter
+```
+#perform k-fold cross validation 
+#Define K (num_folds) for k-fold cross validation
+num_folds=10
+```
+
+To use FCM-GA, utilize the following code block:
 
 ```
-best_position, concept_evolution  = DeepFCMx(training_dataset,  num_dimensions=num_dimensions, num_particles=num_particles, maxiter=epoch)
+best_fcm = FCM_GA(pop_size, mutation_rate, num_dimensions, training_dataset, excel_file_path)
 ```
 
 # Training
 
-The training process of DeepFCMx-GA is demonstrated.
+The training process of FCM-GA is demonstrated.
 
 ```
-#Learning technique with Particle Swarm Optimization Function
-def DeepFCMx(dataset, num_dimensions, num_particles, maxiter):
-    err_best_g = float('inf')
-    pos_best_g = []
-    swarm = [Particle() for _ in range(num_particles)]
-    concept_evolution = np.zeros((maxiter, num_dimensions))  # Record concept values over epochs
+def FCM_GA(population_size,  mutation_rate, num_dimensions, training_dataset, excel_file_path):
+    # Generate initial population
+    population = generate_population_from_excel(population_size, num_dimensions, excel_file_path)
+  
+    # for generation in range(num_generations):
+    fitness_scores = np.array([evaluate_fitness(fcm, training_dataset, num_dimensions) for fcm in population])
+  
+    # Selection
+    parents = [selection(population, fitness_scores) for _ in range(population_size//2)]
+  
+    # Crossover
+    children = [crossover(parent1, parent2) for parent1, parent2 in parents]
+    children = [child for sublist in children for child in sublist]
 
-    for k in range(maxiter):
-        # Evaluate fitness of each particle at its current position
-        for particle in swarm:
-            fitness_result = 0
-            for row in dataset:
-                fcm_output = [0] * num_dimensions
-                for i in range(num_dimensions):
-                    sum_temp = sum(particle.position_i[j][i] * row[j] for j in range(num_dimensions) if i != j)
-                    fcm_output[i] = sig(sum_temp)
+    # Mutation
+    mutated_children = [mutation(child, mutation_rate) for child in children]
 
-                fitness_result += np.square(fcm_output[-1] - row[-1])
+    # Create new population
+    population = mutated_children
+  
+    # Optionally, you can track the best FCM in each generation
+    best_fcm = min(population, key=lambda fcm: evaluate_fitness(fcm, training_dataset, num_dimensions))
+    # print(f"Generation {generation+1}: Best Fitness Score: {evaluate_fitness(best_fcm, dataset)}")  
+    return best_fcm
+```
 
-            particle.err_i = fitness_result / len(dataset)
-            particle.evaluate(particle.err_i)
+# Interpretation
 
-            # Update the global best position
-            if particle.err_i < err_best_g or k == 0:
-                pos_best_g = particle.position_i.copy()
-                err_best_g = particle.err_i
-
-        # Record the concept evolution
-        concept_evolution[k, :] = [sig(sum(pos_best_g[j][i] * value for j, value in enumerate(row))) for i in range(num_dimensions)]
-
-        # Update velocity and position of each particle after fitness evaluation
-        for particle in swarm:
-            particle.update_velocity(pos_best_g)
-            particle.update_position()
-    
-    
-
-    return pos_best_g, concept_evolution
+This block of code will demonstrate the interconnections among concepts
 
 ```
+plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
+```
+
+![Plot](assets/FCM-GA_CAD_Clinical.jpg)
 
 ## Dataset Description:
 
-•	all_images: It includes the imaging dataset
+•	dataset.xlsx: It includes the clinical data in an array format with rows the number of instances and columns. For every instance, the id is provided.
+•	suggested_weights: This Excel file is optional for FCM-GA. It includes the linguistic values for the input-output interconnections among FCM concepts provided by experts.
 
 ## Prerequisites:
 
@@ -83,3 +112,25 @@ def DeepFCMx(dataset, num_dimensions, num_particles, maxiter):
 [Ioannis Apostolopoulos](https://emerald.uth.gr/personnel/)
 [Nikolaos Papandrianos](https://emerald.uth.gr/personnel/)
 [Serafeim Moustakidis](https://emerald.uth.gr/personnel/)
+
+## Assets
+
+In the /assets folder, you'll find an example file for suggested_weights, and a visual representation of the interconnections among concepts in a FCM graph.
+For suggested weights file, the following linguistic values must be provided, each representing a specific range:
+
+For positive influence among concepts:
+Very Weak (VW): [0,0.25]
+Weak (W): [0.1,0.4]
+Medium (M): [0.35,0.65]
+Strong (S): [0.55,0.85]
+Very Strong (VS): [0.75,1]
+
+For negative influence among concepts:
+-Very Weak (-VW): [-0.25,0]
+-Weak (-W): [-0.4,-0.1]
+-Medium (-M): [-0.65,-0.35]
+-Strong (-S): [-0.85,-0.55]
+-Very Strong (-VS): [-1,0.75]
+
+Otherwise please provide the value :
+random: [-1,1]
