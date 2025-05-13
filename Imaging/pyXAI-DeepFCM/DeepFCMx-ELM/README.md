@@ -1,8 +1,8 @@
-# DeepFCMx-GA
+# DeepFCMx-elm
 
 # Usage
 
-DeepFCMx-GA provides a transparent view of interconnections and their contributions to FCM's predictive accuracy.
+DeepFCMx-ELM provides a transparent view of interconnections and their contributions to FCM's predictive accuracy.
 
 The dataset should be initialized here:
 ```
@@ -20,15 +20,11 @@ or else, the 'suggested_weights' variable should be equal to 'None' as it is.
 ```
 excel_file_path=None
 ```
-To modify the number of population and num generations, and mutation rate, adjust the following parameters accordingly
+To modify the learning rate, number of iterations and hidden units, adjust the following parameters accordingly
 ```
-pop_size= 100 
-
-#define number of generations
-num_generations = 100
-
-#define mutation rate
-mutation_rate = 0.1
+learning_rate = 0.01
+num_iterations = 20
+num_hidden_units=30
 ```
 To alter the number of folds for k-fold cross validation, adjust the following parameter
 ```
@@ -37,41 +33,56 @@ To alter the number of folds for k-fold cross validation, adjust the following p
 num_folds=10
 ```
 
-To use FCM-GA, utilize the following code block:
+To use DeepFCMX-ELM, utilize the following code block:
 
 ```
-best_fcm = FCM_GA(pop_size, mutation_rate, num_dimensions, training_dataset, excel_file_path)
+best_fcm_weights = DeepFCMxELM(initial_weight_matrix, num_iterations, training_dataset, num_hidden_units,learning_rate)
 ```
 
 # Training
 
-The training process of FCM-GA is demonstrated.
+The training process of DeepFCMx-ELM is demonstrated.
 
 ```
-def FCM_GA(population_size,  mutation_rate, num_dimensions, training_dataset, excel_file_path):
-    # Generate initial population
-    population = generate_population_from_excel(population_size, num_dimensions, excel_file_path)
-  
-    # for generation in range(num_generations):
-    fitness_scores = np.array([evaluate_fitness(fcm, training_dataset, num_dimensions) for fcm in population])
-  
-    # Selection
-    parents = [selection(population, fitness_scores) for _ in range(population_size//2)]
-  
-    # Crossover
-    children = [crossover(parent1, parent2) for parent1, parent2 in parents]
-    children = [child for sublist in children for child in sublist]
 
-    # Mutation
-    mutated_children = [mutation(child, mutation_rate) for child in children]
+def DeepFCMxELM(initial_weights, num_iterations, input_features, learning_rate=0.001, lambda_reg=0.01):
+    best_weights = initial_weights.copy()
+    best_mse = float('inf')
+    num_dimensions = initial_weights.shape[0]
+    num_hidden_units = 20  # Number of hidden units in ELM, you can adjust this as needed
+    # print(input_features)
+    training_real_output = input_features[:, -1]  # Assuming the last column is the output
 
-    # Create new population
-    population = mutated_children
-  
-    # Optionally, you can track the best FCM in each generation
-    best_fcm = min(population, key=lambda fcm: evaluate_fitness(fcm, training_dataset, num_dimensions))
-    # print(f"Generation {generation+1}: Best Fitness Score: {evaluate_fitness(best_fcm, dataset)}")  
-    return best_fcm
+    lower_bounds = initial_weights - 0.1
+    upper_bounds = initial_weights + 0.1
+
+    for iteration in range(num_iterations):
+        fcm_weights = update_fcm_weights(best_weights, input_features)
+        fcm_weights = constrain_weights(fcm_weights, initial_weights, lower_bounds, upper_bounds)
+        input_weights = np.random.uniform(size=(num_hidden_units, num_dimensions - 1), low=-1, high=1)
+        hidden_layer_output = np.dot(input_features[:, :-1], input_weights.T)  # Exclude the last column for input features
+        
+        # Add bias term to hidden layer output
+        hidden_layer_output_with_bias = np.hstack((hidden_layer_output, np.ones((hidden_layer_output.shape[0], 1))))
+        
+        # Compute output weights using Moore-Penrose pseudoinverse
+        output_weights = np.linalg.pinv(hidden_layer_output_with_bias).dot(training_real_output)
+        
+        elm_output, _ = elm_predict_function(input_features[:, :-1], input_weights, output_weights)  # Exclude the last column for input features
+        current_mse = mse_loss_with_regularization(training_real_output, elm_output, fcm_weights, initial_weights, lambda_reg)
+
+        if current_mse < best_mse:
+            best_mse = current_mse
+            best_weights = fcm_weights
+        
+     
+        
+        best_weights = fcm_weights + learning_rate * ((training_real_output - elm_output) * elm_output * (1 - elm_output)).T @ input_features
+        if current_mse < 0.8:
+            break
+
+    return best_weights
+
 ```
 
 # Interpretation
@@ -82,7 +93,7 @@ This block of code will demonstrate the interconnections among concepts
 plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ```
 
-![Plot](assets/FCM-GA_CAD_Clinical.jpg)
+
 
 ## Dataset Description:
 
