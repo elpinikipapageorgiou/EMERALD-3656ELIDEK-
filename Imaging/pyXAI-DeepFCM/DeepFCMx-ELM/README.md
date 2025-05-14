@@ -1,4 +1,4 @@
-# DeepFCMx-elm
+# DeepFCMx-ELM
 
 # Usage
 
