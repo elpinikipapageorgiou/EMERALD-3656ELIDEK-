@@ -73,7 +73,6 @@ Grad-CAM provides interpretation of CNN predictions, highlighting critical regio
 For NSCLC diagnosis with CT images
 [https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html)
 For CAD diagnosis with Polar Maps images
-![Plot](assets/Grad-CAMPolarMapsCAD.jpg)
 [https://www.mdpi.com/2076-3417/13/21/11953](https://www.mdpi.com/2076-3417/13/21/11953)
 
 
@@ -181,6 +180,3 @@ Papandrianos, N.I.; Feleki, A.; Papageorgiou, E.I.; Martini, C. Deep Learning-Ba
 
 Papandrianos, N.I.; Feleki, A.; Papageorgiou, E.I.; Martini, C. Deep Learning-Based Automated Diagnosis for Coronary Artery Disease Using SPECT-MPI Images. J. Clin. Med. 2022, 11, 3918. https://doi.org/10.3390/jcm11133918
 
-## Assets
-
-In the /assets folder, you'll find demonstration of Grad-CAM applied to CNN predictions.
