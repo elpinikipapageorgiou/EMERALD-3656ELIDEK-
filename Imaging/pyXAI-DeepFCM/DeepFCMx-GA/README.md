@@ -108,20 +108,10 @@ def DeepFCMx_GA(population_size,  mutation_rate, num_dimensions, dataset, num_cl
     return best_fcm
 ```
 
-# Interpretation
-
-This block of code will demonstrate the interconnections among concepts
-
-```
-plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
-```
-
-![Plot](assets/FCM-GA_CAD_Clinical.jpg)
 
 ## Dataset Description:
 
-•	dataset.xlsx: It includes the clinical data in an array format with rows the number of instances and columns. For every instance, the id is provided.
-•	suggested_weights: This Excel file is optional for FCM-GA. It includes the linguistic values for the input-output interconnections among FCM concepts provided by experts.
+•	imaging_folder: It includes the images.
 
 ## Prerequisites:
 
