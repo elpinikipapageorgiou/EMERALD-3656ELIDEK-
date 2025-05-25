@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.cluster import KMeans
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
-def optimize_fcm(population_size,  mutation_rate, num_dimensions, dataset, num_clusters):
+def DeepFCMx_GA(population_size,  mutation_rate, num_dimensions, dataset, num_clusters):
     # Generate initial population
     population = generate_population_from_excel(population_size, num_dimensions, num_clusters)
     
