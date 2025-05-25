@@ -207,12 +207,6 @@ column_names = dataset.columns.tolist()
 mean_accuracies=[]
 mean_losses=[]
 
-#define number of epochs
-epoch = 25
-
-#define number of particles
-num_particles = 40
-
 #perform k-fold cross validation
 folds=10
 
