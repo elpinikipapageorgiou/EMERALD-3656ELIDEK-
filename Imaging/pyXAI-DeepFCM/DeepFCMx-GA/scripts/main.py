@@ -20,7 +20,7 @@ import cv2
 from genetic_functions import selection, crossover, mutation
 from compute_mean_values import compute_mean_deviations
 from evaluate_fitness_function import sig, calculate_deviation
-from fcm_functions import create_feature_maps, optimize_fcm
+from fcm_functions import create_feature_maps, DeepFCMx_GA
 from keras import layers
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
@@ -274,7 +274,7 @@ for train_index, test_index in kf.split(dataset):
     training_dataset= np.array(training_dataset)
     testing_dataset= np.array(testing_dataset)
 
-    best_position = optimize_fcm(pop_size, mutation_rate, num_dimensions, training_dataset, num_clusters)
+    best_position = DeepFCMx_GA(pop_size, mutation_rate, num_dimensions, training_dataset, num_clusters)
     # end = time.time()
     #     # Plotting concept evolution
     # plt.figure(figsize=(15, 10))
