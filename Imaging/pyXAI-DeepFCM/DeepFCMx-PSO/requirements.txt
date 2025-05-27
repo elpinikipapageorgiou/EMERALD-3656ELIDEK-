@@ -1,0 +1,13 @@
+pandas
+numpy
+openpyxl
+math
+skikit-learn
+tensorflow
+random
+time
+statistics
+glob
+keras
+os
+opencv-python
