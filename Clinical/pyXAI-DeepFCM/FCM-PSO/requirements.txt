@@ -1,10 +1,6 @@
-numpy
-time
-pandas
-scikit-learn
-statistics
-matplotlib
-networkx
-random
-math
-openpyxl
+numpy==1.24.3
+pandas==2.0.2
+scikit-learn==1.3.0
+matplotlib==3.8.1
+networkx==3.2.1
+openpyxl==3.1.2
