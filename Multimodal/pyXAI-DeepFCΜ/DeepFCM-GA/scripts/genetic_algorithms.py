@@ -8,10 +8,9 @@ def selection(population, fitness_scores):
     return population[idx[0]], population[idx[1]]
 
 
-def crossover(parent1, parent2):
-    crossover_point = np.random.randint(1, len(parent1) - 1)
-    child1 = np.vstack((parent1[:crossover_point], parent2[crossover_point:]))
-    child2 = np.vstack((parent2[:crossover_point], parent1[crossover_point:]))
+def crossover(crossover_rate, parent1, parent2):
+    child1 = np.vstack((parent1[:crossover_rate], parent2[crossover_rate:]))
+    child2 = np.vstack((parent2[:crossover_rate], parent1[crossover_rate:]))
     return child1, child2
 
 

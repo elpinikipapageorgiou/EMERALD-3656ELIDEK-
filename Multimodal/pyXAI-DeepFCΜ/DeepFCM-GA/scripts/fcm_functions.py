@@ -27,7 +27,7 @@ def evaluate_fitness(fcm, data, num_dimensions):
     
     return fitness_result
 
-def DeepFCM_GA(population_size,  mutation_rate, num_dimensions, training_dataset, excel_file_path):
+def DeepFCM_GA(population_size,  crossover_rate, mutation_rate, num_dimensions, training_dataset, excel_file_path):
     # Generate initial population
     population = generate_population_from_excel(population_size, num_dimensions, excel_file_path)
     
@@ -37,7 +37,7 @@ def DeepFCM_GA(population_size,  mutation_rate, num_dimensions, training_dataset
     parents = [selection(population, fitness_scores) for _ in range(population_size//2)]
     
     # Crossover
-    children = [crossover(parent1, parent2) for parent1, parent2 in parents]
+    children = [crossover(crossover_rate, parent1, parent2) for parent1, parent2 in parents]
     children = [child for sublist in children for child in sublist]
 
     # Mutation

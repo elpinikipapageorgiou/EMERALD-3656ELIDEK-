@@ -30,6 +30,8 @@ pop_size= 40
 #define number of generations
 num_generations = 150
 
+#define crossover rate
+crossover_rate = 0.8
 
 #define mutation rate
 mutation_rate = 0.08
@@ -294,7 +296,7 @@ for train_index, test_index in kf.split(dataset):
     testing_dataset = testing_dataset.values
   
     # Get the best FCM from the final population
-    best_fcm = DeepFCM_GA(pop_size, mutation_rate, num_dimensions, training_dataset, excel_file_path)
+    best_fcm = DeepFCM_GA(pop_size, crossover_rate, mutation_rate, num_dimensions, training_dataset, excel_file_path)
 
     # print("Best FCM:", best_fcm.shape)
     np.fill_diagonal(best_fcm, 0)
