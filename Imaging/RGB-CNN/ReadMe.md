@@ -18,7 +18,13 @@ Keywords: deep learning; convolutional neural network; explainable artificial in
 
 RGB-CNN is a custom-built Convolutional Neural Network (CNN), specifically tailored to each classification task by adapting its architecture accordingly. Its flexibility and effectiveness have been demonstrated across multiple case studies.
 
-To use RGB-CNN, utilize the following code block:
+To use RGB-CNN, pass the image directory to the data_dir parameter:
+
+```
+data_dir = 'all_images/'
+```
+# Usage
+To modify the RGB-CNN architecture, please add/remove the nodes and layers in the following block code:
 
 ```
 model = Sequential()
