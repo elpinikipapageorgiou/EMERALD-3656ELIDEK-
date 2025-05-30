@@ -4,27 +4,27 @@
 
 ---
 
-## 🔬 Core Technologies
+## Core Technologies
 
 EMERALD incorporates modern ICT and soft computing tools to enable scalable, interpretable, and clinically relevant analytics:
 
-- 🧠 **Deep Learning (DL)**
-- 🧩 **Data Mining**
-- 🌐 **Advanced Fuzzy Cognitive Maps (FCMs)**
-- 🤖 **Dynamic & Deep FCMs (DeepFCMs)**
+- **Deep Learning (DL)**
+- **Data Mining**
+- **Advanced Fuzzy Cognitive Maps (FCMs)**
+- **Dynamic & Deep FCMs (DeepFCMs)**
 
 ---
 
-## 🧠 Unique Approach
+## Unique Approach
 
-### ✔️ Holistic & Patient-Centered Modeling
+### Holistic & Patient-Centered Modeling
 
 EMERALD has simplified the analysis of large, heterogeneous clinical datasets by combining:
 - Structured and unstructured EHR data
 - Expert clinical knowledge
 - Broader risk factors (social, environmental, occupational, economic)
 
-### 🧠 DeepFCMs: Innovation in Explainable AI
+### DeepFCMs: Innovation in Explainable AI
 
 At the heart of EMERALD is the development of **DeepFCMs**, a novel component of explainable MDSSs:
 - Fuse multimodal clinical data (e.g. text, images)
@@ -34,7 +34,7 @@ At the heart of EMERALD is the development of **DeepFCMs**, a novel component of
 
 ---
 
-## 🧩 Model-Driven Data Analytics
+## Model-Driven Data Analytics
 
 EMERALD's framework supports interpretable, data-driven decisions through:
 - **Dynamic FCMs** for personalized treatment modeling and health technology assessment
@@ -43,20 +43,20 @@ EMERALD's framework supports interpretable, data-driven decisions through:
 
 ---
 
-## 🎯 Achieved Outcomes
+## Achieved Outcomes
 
 EMERALD has delivered:
 
-- 🔍 Improved understanding and transparency in clinical decision-making  
-- ⚖️ Dynamic risk assessment capabilities embedded in predictive workflows  
-- 🩺 High-value, personalized healthcare models  
-- 📊 Explainable support systems across critical domains such as:
+- Improved understanding and transparency in clinical decision-making  
+- Dynamic risk assessment capabilities embedded in predictive workflows  
+- High-value, personalized healthcare models  
+- Explainable support systems across critical domains such as:
   - Coronary Artery Disease (CAD)
   - Non-Small Cell Lung Cancer (NSCLC)
 
 ---
 
-## 🧬 Project Ecosystem
+## Project Ecosystem
 
 EMERALD has also established a **multimodal repository** of heterogeneous EHR data, orchestrated to support dynamic, personalized modeling and risk analysis. This has laid the foundation for an **XAI-powered clinical decision ecosystem**, optimizing healthcare delivery through:
 
@@ -66,7 +66,7 @@ EMERALD has also established a **multimodal repository** of heterogeneous EHR da
 
 ---
 
-## 👥 Key Personnel 
+## Key Personnel 
 [https://emerald.uth.gr/personnel/](https://emerald.uth.gr/personnel/)
 
 - [Professor Elpiniki Papageorgiou] – Principal Investigator
@@ -84,4 +84,4 @@ EMERALD has also established a **multimodal repository** of heterogeneous EHR da
 
 ---
 
-For more details, visit the official site: [emerald-project.eu](https://emerald.uth.gr/)
+For more details, visit the official site: [emerald-project](https://emerald.uth.gr/)
