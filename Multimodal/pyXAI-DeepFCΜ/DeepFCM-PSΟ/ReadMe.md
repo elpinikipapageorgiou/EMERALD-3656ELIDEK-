@@ -186,7 +186,7 @@ Anna Feleki, Ioannis Apostolopoulos, Elpiniki Papageorgiou, Serafeim Moustakidis
 
 ## Assets
 
-In the /assets folder, you'll find an example file for suggested_weights, a demonstration of Grad-CAM, and a visual representation of the interconnections among concepts in a DeepFCM graph.
+In the /assets folder, you'll find an example file for suggested_weights, and a visual representation of the interconnections among concepts in a DeepFCM graph.
 For suggested weights file, the following linguistic values must be provided, each representing a specific range:
 
 For positive influence among concepts:
