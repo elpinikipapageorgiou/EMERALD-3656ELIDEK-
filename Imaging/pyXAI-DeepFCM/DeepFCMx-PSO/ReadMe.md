@@ -136,7 +136,7 @@ This block of code will demonstrate the interconnections among concepts
 plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ```
 
-![Plot](assets/DeepFCMx_PSO_CAD.jpg)
+![Plot](assets/DeepFCMx_PSO_CAD.png)
 
 ## Dataset Description:
 
