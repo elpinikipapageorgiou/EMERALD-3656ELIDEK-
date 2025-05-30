@@ -62,10 +62,9 @@ This block of code will demonstrate the interconnections among concepts
 plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ```
 
-![Plot](assets/DeepFCM-ELMCAD.jpg)
+![Plot](assets/DeepFCM-ELM_CAD.jpg)
 
 Additionally, Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
-![Plot](assets/Grad-CAMPolarMapsCAD.jpg)
 
 ```
 for filename in os.listdir(data_dir):
