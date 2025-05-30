@@ -81,7 +81,6 @@ plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ![Plot](assets/DeepFCM_PSO_CAD.jpg)
 
 Additionally, Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
-![Plot](assets/Grad_CAM_PolarMaps_CAD.jpg)
 
 ```
 for filename in os.listdir(data_dir):
