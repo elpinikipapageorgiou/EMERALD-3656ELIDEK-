@@ -128,15 +128,7 @@ def DeepFCMx(dataset, num_dimensions, num_particles, maxiter):
     return pos_best_g, concept_evolution
 
 ```
-# Interpretation
 
-This block of code will demonstrate the interconnections among concepts
-
-```
-plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
-```
-
-![Plot](assets/DeepFCMx_PSO_CAD.png)
 
 ## Dataset Description:
 
