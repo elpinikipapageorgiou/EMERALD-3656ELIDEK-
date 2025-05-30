@@ -84,4 +84,4 @@ EMERALD has also established a **multimodal repository** of heterogeneous EHR da
 
 ---
 
-For more details, visit the official site: [emerald-project.eu]([https://emerald-project.eu](https://emerald.uth.gr/))
+For more details, visit the official site: [emerald-project.eu](https://emerald.uth.gr/)
