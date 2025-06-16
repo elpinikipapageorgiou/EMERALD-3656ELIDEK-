@@ -1,5 +1,122 @@
 # DeepFCM-GA
 
+# Multimodal approach (Clinical + Imaging Data)
+
+# Define class labels
+
+class0_name='normal'
+
+class1_name='pathological'
+
+# To set the path of the imaging folder
+
+Specify the input size (in pixels) for resizing all images:
+
+pixel_size = 300
+
+Ensure that your images have one of the following extensions
+
+```
+def read_and_process_image(list_of_images):
+    X = []
+    for img in list_of_images:
+        image = cv2.imread(img)
+        X.append(cv2.resize(image, (pixel_size, pixel_size), interpolation=cv2.INTER_CUBIC))
+
+    # Define the output of each image to a different list
+    y = [0 if class0_name in addr else 1 for addr in list_of_images]
+
+    return X, y
+```
+
+# Model training configuration
+
+Set the number of epochs, batch size, and architecture of RGB-CNN.
+
+epochs = 200
+
+batch_size = 32
+
+# CNN Architecture (RGB-CNN)
+
+model = Sequential([
+
+    Conv2D(16, (3, 3), activation='relu', input_shape=(pixel_size, pixel_size, 3)),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(32, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(128, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Flatten(),
+
+    Dropout(0.1),
+
+    Dense(128, activation='relu'),
+
+    Dense(64, activation='relu'),
+
+    Dense(1, activation='sigmoid')
+
+])
+
+# Clinical Data Normalization
+
+Select which columns to be normalized with the Min-max normalization
+
+columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
+
+# DeepFCM-GA hyperparameters
+
+pop_size= 40
+
+#define number of generations
+
+num_generations = 150
+
+#define crossover rate
+
+crossover_rate = 0.8
+
+#define mutation rate
+
+mutation_rate = 0.08
+
+#define number of iterations
+
+num_iterations=40
+
+num_folds=10
+
+# Expert knowledge (if provided)
+
+If expert knowledge is provided in the form of fuzzy sets, the user must define the Excel file.
+
+excel_file_path = "suggested_weights.xlsx"
+
 # Usage
 
 This multimodal approach enhances interpretability by integrating both clinical and imaging data, providing a transparent view of interconnections and their contributions to DeepFCM's predictive accuracy.
@@ -53,7 +170,6 @@ plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ![Plot](assets/DeepFCM_GA_CAD.jpg)
 
 Additionally, Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
-![Plot](assets/Grad_CAMPolar_Maps_CAD.jpg)
 
 ```
 for filename in os.listdir(data_dir):
@@ -82,7 +198,7 @@ for filename in os.listdir(data_dir):
             print("The model misclassified this instance as class1")
         else:
             print("The model predicted this instance as class2")
-          
+      
         if prediction == 0:
             predicted_class = 'class1'
             print("The model misclassified this instance as class1")
@@ -101,8 +217,8 @@ for filename in os.listdir(data_dir):
         # Convert images to RGB for display
         # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
-      
-      
+  
+  
         # Concatenate heatmap and original image side by side
         concatenated = np.concatenate((image, heatmap_rgb), axis=1)
 
