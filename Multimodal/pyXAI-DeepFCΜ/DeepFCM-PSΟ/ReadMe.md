@@ -13,6 +13,102 @@ This is the official implementation of
 Myocardial Perfusion Imaging (MPI) has played a central role in the non-invasive identification of patients with Coronary Artery Disease (CAD). Clinical factors, such as recurrent diseases, predisposing factors, and diagnostic tests, also play a vital role. However, none of these factors offer a straightforward and reliable indication, making the diagnosis of CAD a non-trivial task for nuclear medicine experts. While Machine Learning (ML) and Deep Learning (DL) techniques have shown promise in this domain, their “black-box” nature remains a significant barrier to clinical adoption, a challenge that the existing literature has not yet fully addressed. This study introduces the Deep Fuzzy Cognitive Map (DeepFCM), a novel, transparent, and explainable model designed to diagnose CAD using imaging and clinical data. DeepFCM employs an inner Convolutional Neural Network (CNN) to classify MPI polar map images. The CNN’s prediction is combined with clinical data by the FCM-based classifier to reach an outcome regarding the presence of CAD. For the initialization of interconnections among DeepFCM concepts, expert knowledge is provided. Particle Swarm Optimization (PSO) is utilized to adjust the weight values to the correlated dataset and expert knowledge. The model’s key advantage lies in its explainability, provided through three main functionalities. First, DeepFCM integrates a Gradient Class Activation Mapping (Grad-CAM) algorithm to highlight significant regions on the polar maps. Second, DeepFCM discloses its internal weights and their impact on the diagnostic outcome. Third, the model employs the Generative Pre-trained Transformer (GPT) version 3.5 model to generate meaningful explanations for medical staff. Our dataset comprises 594 patients, who underwent invasive coronary angiography (ICA) at the department of Nuclear Medicine of the University Hospital of Patras in Greece. As far as the classification results are concerned, DeepFCM achieved an accuracy of 83.07%, a sensitivity of 86.21%, and a specificity of 79.99%. The explainability-enhancing methods were assessed by the medical experts on the authors’ team and are presented within. The proposed framework can have immediate application in daily routines and can also serve educational purposes.
 Keywords:  fuzzy cognitive maps; particle swarm optimization; convolutional neural networks; classification; feature selection; Grad-CAM; coronary artery disease; natural language processing
 
+# Multimodal approach (Clinical + Imaging Data)
+
+# Define class labels
+
+class0_name='normal'
+
+class1_name='pathological'
+
+# To set the path of the imaging folder
+
+Ensure that your images have one of the following extensions
+
+```
+data_dir = 'images/'
+
+# Collect all image files
+image_files = [os.path.join(data_dir, file) for file in os.listdir(data_dir) if file.lower().endswith(('.tif', '.tiff', '.jpeg', '.png'))]extensions = ['jpg', 'png', 'jpeg', 'tiff', '.tif','.TIFF', '.TIF']
+```
+
+# Model training configuration
+
+Set the number of pixel size, epochs, batch size, and architecture of RGB-CNN.
+
+pixel_size = 300
+
+epochs = 200
+
+batch_size = 32
+
+# CNN Architecture (RGB-CNN)
+
+model = Sequential([
+
+    Conv2D(16, (3, 3), activation='relu', input_shape=(pixel_size, pixel_size, 3)),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(32, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(128, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Flatten(),
+
+    Dropout(0.1),
+
+    Dense(128, activation='relu'),
+
+    Dense(64, activation='relu'),
+
+    Dense(1, activation='sigmoid')
+
+])
+
+# Clinical Data Normalization
+
+Select which columns to be normalized with the Min-max normalization
+
+columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
+
+
+# Define hyper-parameters for DeepFCM-PSO
+
+##Define number of particles
+
+num_particles = 40
+
+#define number of epochs
+
+epoch = 20
+
+#Perform k-fold cross validation
+
+folds=10
+
 # Usage
 
 This multimodal approach enhances interpretability by integrating both clinical and imaging data, providing a transparent view of interconnections and their contributions to DeepFCM's predictive accuracy.
@@ -109,7 +205,7 @@ for filename in os.listdir(data_dir):
             print("The model misclassified this instance as class1")
         else:
             print("The model predicted this instance as class2")
-          
+        
         if prediction == 0:
             predicted_class = 'class1'
             print("The model misclassified this instance as class1")
@@ -128,8 +224,8 @@ for filename in os.listdir(data_dir):
         # Convert images to RGB for display
         # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
-      
-      
+    
+    
         # Concatenate heatmap and original image side by side
         concatenated = np.concatenate((image, heatmap_rgb), axis=1)
 
