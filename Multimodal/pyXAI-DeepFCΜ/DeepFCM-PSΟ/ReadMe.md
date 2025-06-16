@@ -114,6 +114,12 @@ epoch = 20
 
 folds=10
 
+# Expert knowledge (if provided)
+
+If expert knowledge is provided in the form of fuzzy sets, the user must define the Excel file.
+
+suggested_weights = pd.read_excel("suggested_weights.xlsx", engine='openpyxl')
+
 # Usage
 
 This multimodal approach enhances interpretability by integrating both clinical and imaging data, providing a transparent view of interconnections and their contributions to DeepFCM's predictive accuracy.
@@ -210,7 +216,7 @@ for filename in os.listdir(data_dir):
             print("The model misclassified this instance as class1")
         else:
             print("The model predicted this instance as class2")
-        
+      
         if prediction == 0:
             predicted_class = 'class1'
             print("The model misclassified this instance as class1")
@@ -229,8 +235,8 @@ for filename in os.listdir(data_dir):
         # Convert images to RGB for display
         # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
-    
-    
+  
+  
         # Concatenate heatmap and original image side by side
         concatenated = np.concatenate((image, heatmap_rgb), axis=1)
 
