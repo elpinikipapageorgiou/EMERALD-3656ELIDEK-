@@ -33,13 +33,13 @@ from gradcam_file import GradCAM
 random.seed(42)
 np.random.seed(42)
 
-# Define pixel size for rows and columns
-pixel_size = 300
-
-num_epochs=2
 
 class0_name='normal'
 class1_name='pathological'
+
+# Define pixel size for rows and columns
+pixel_size = 300
+
 
 # Function to read and process images
 def read_and_process_image(list_of_images):
@@ -70,6 +70,9 @@ X = X / 255.0
 
 # Split data
 X_train, X_test, y_train, y_test, train_files, test_files = train_test_split(X, y, image_files, test_size=0.20, random_state=42)
+
+num_epochs=200
+batch_size=32
 
 # Define model architecture
 model = Sequential([
@@ -102,14 +105,12 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 early_stopping = EarlyStopping(monitor='val_loss', patience=15, min_delta=1e-4, restore_best_weights=True)
 
 # Train the model
-history = model.fit(X_train, y_train, epochs=num_epochs, validation_split=0.2, callbacks=[early_stopping])
+history = model.fit(X_train, y_train, epochs=num_epochs,batch_size=batch_size, validation_split=0.2, callbacks=[early_stopping])
 
 model.save(f"model_rgb.keras")
 
 
 ###Grad-CAM
-
-
 model = keras.models.load_model("model_rgb.keras")
 
 
@@ -252,7 +253,9 @@ num_hidden_units = num_dimensions
 #Values that can be altered
 learning_rate = 0.01
 num_iterations = 20
-num_hidden_units = 30  # Number of hidden units in ELM, you can adjust this as needed
+# Number of hidden units in ELM, you can adjust this as needed
+num_hidden_units = 30  
+
 
 #In case user uploads weights in the form of fuzzy sets for the initialization of interconnections
 suggested_weights=None
