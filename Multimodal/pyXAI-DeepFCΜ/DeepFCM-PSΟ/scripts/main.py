@@ -40,6 +40,9 @@ tf.random.set_seed(42)
 class0_name='normal'
 class1_name='pathological'
 
+# Define pixel size for rows and columns
+pixel_size = 300
+
 # Function to read and process images
 def read_and_process_image(list_of_images):
     X = []
@@ -71,8 +74,7 @@ X = X / 255.0
 # Split data
 X_train, X_test, y_train, y_test, train_files, test_files = train_test_split(X, y, image_files, test_size=0.20, random_state=42)
 
-# Define pixel size for rows and columns
-pixel_size = 300
+
 epochs = 200
 batch_size = 32
 
