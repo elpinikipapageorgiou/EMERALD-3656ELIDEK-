@@ -22,25 +22,7 @@ from compute_mean_values import compute_mean_deviations
 from plot_fcm import plot_FCM_weight_matrix_graph
 from gradcam_file import GradCAM
 
-#--- MAIN ---------------------------------------------------------------------
 
-#define population size
-pop_size= 40 
-
-#define number of generations
-num_generations = 150
-
-#define crossover rate
-crossover_rate = 0.8
-
-#define mutation rate
-mutation_rate = 0.08
-
-#define number of iterations
-num_iterations=40
-
-pixel_size = 300
-num_epochs=200
 
 ###################################################################
 ###################################################################
@@ -52,12 +34,10 @@ num_epochs=200
 random.seed(42)
 np.random.seed(42)
 
-# Define pixel size for rows and columns
-
-
 class0_name='normal'
 class1_name='pathological'
 
+pixel_size = 300
 # Function to read and process images
 def read_and_process_image(list_of_images):
     X = []
@@ -87,6 +67,9 @@ X = X / 255.0
 
 # Split data
 X_train, X_test, y_train, y_test, train_files, test_files = train_test_split(X, y, image_files, test_size=0.20, random_state=42)
+
+num_epochs=200
+batch_size=32
 
 # Define model architecture
 model = Sequential([
@@ -119,7 +102,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 early_stopping = EarlyStopping(monitor='val_loss', patience=15, min_delta=1e-4, restore_best_weights=True)
 
 # Train the model
-history = model.fit(X_train, y_train, epochs=num_epochs, validation_split=0.2, callbacks=[early_stopping])
+history = model.fit(X_train, y_train, epochs=num_epochs, batch_size=batch_size, validation_split=0.2, callbacks=[early_stopping])
 model.save(f"model_rgb.keras")
 
 
@@ -260,11 +243,30 @@ dataset.fillna(method="bfill", inplace=True)
 column_names = dataset.columns.tolist()
 #read the intial linguistic values provided by nuclear experts for the initialization of interconnections among input-output concepts
 
+#--- MAIN ---------------------------------------------------------------------
+
+#define population size
+pop_size= 40 
+
+#define number of generations
+num_generations = 150
+
+#define crossover rate
+crossover_rate = 0.8
+
+#define mutation rate
+mutation_rate = 0.08
+
+#define number of iterations
+num_iterations=40
+
+num_folds=10
+
 excel_file_path=None
 # excel_file_path = "suggested_weights.xlsx"
 
 population = generate_population_from_excel(pop_size, num_dimensions, excel_file_path)
-num_folds=10
+
 
 fold=0
 acc=[]
