@@ -37,9 +37,6 @@ random.seed(42)
 np.random.seed(42)
 tf.random.set_seed(42)
 
-# Define pixel size for rows and columns
-pixel_size = 300
-
 class0_name='normal'
 class1_name='pathological'
 
@@ -70,8 +67,14 @@ y = np.array(y)
 # Normalize pixel values
 X = X / 255.0
 
+
 # Split data
 X_train, X_test, y_train, y_test, train_files, test_files = train_test_split(X, y, image_files, test_size=0.20, random_state=42)
+
+# Define pixel size for rows and columns
+pixel_size = 300
+epochs = 200
+batch_size = 32
 
 # Define model architecture
 model = Sequential([
@@ -104,7 +107,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 early_stopping = EarlyStopping(monitor='val_loss', patience=15, min_delta=1e-4, restore_best_weights=True)
 
 # Train the model
-history = model.fit(X_train, y_train, epochs=200, validation_split=0.2, callbacks=[early_stopping])
+history = model.fit(X_train, y_train, epochs=epochs, validation_split=0.2, batch_size=batch_size, callbacks=[early_stopping])
 
 model.save(f"model_rgb.keras")
 
@@ -212,7 +215,6 @@ excel_dataset=pd.read_excel("dataset.xlsx", engine='openpyxl')
 
 
 # # apply normalization techniques by Column
-#How to apply normalization to the columns Age and BMI
 columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
 
 for column in columns_to_normalize:
