@@ -23,20 +23,26 @@ class1_name='pathological'
 
 # To set the path of the imaging folder
 
+Specify the input size (in pixels) for resizing all images:
+
+pixel_size = 300
+
 Ensure that your images have one of the following extensions
 
 ```
-data_dir = 'images/'
+def read_and_process_image(list_of_images):
+    X = []
+    for img in list_of_images:
+        image = cv2.imread(img)
+        X.append(cv2.resize(image, (pixel_size, pixel_size), interpolation=cv2.INTER_CUBIC))
 
-# Collect all image files
-image_files = [os.path.join(data_dir, file) for file in os.listdir(data_dir) if file.lower().endswith(('.tif', '.tiff', '.jpeg', '.png'))]extensions = ['jpg', 'png', 'jpeg', 'tiff', '.tif','.TIFF', '.TIF']
+    # Define the output of each image to a different list
+    y = [0 if class0_name in addr else 1 for addr in list_of_images]
+
+    return X, y
 ```
 
-# Model training configuration
-
-Set the number of pixel size, epochs, batch size, and architecture of RGB-CNN.
-
-pixel_size = 300
+Set the number of epochs, batch size, and architecture of RGB-CNN.
 
 epochs = 200
 
@@ -93,7 +99,6 @@ model = Sequential([
 Select which columns to be normalized with the Min-max normalization
 
 columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
-
 
 # Define hyper-parameters for DeepFCM-PSO
 
