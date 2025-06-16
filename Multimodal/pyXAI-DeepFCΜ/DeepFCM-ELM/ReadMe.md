@@ -1,8 +1,109 @@
 # DeepFCM-ELM
 
-# Usage
+# Multimodal approach (Clinical + Imaging Data)
 
 This multimodal approach enhances interpretability by integrating both clinical and imaging data, providing a transparent view of interconnections and their contributions to DeepFCM's predictive accuracy.
+
+# Define class labels
+
+class0_name='normal'
+
+class1_name='pathological'
+
+# To set the path of the imaging folder
+
+Specify the input size (in pixels) for resizing all images:
+
+pixel_size = 300
+
+Ensure that your images have one of the following extensions
+
+```
+def read_and_process_image(list_of_images):
+    X = []
+    for img in list_of_images:
+        image = cv2.imread(img)
+        X.append(cv2.resize(image, (pixel_size, pixel_size), interpolation=cv2.INTER_CUBIC))
+
+    # Define the output of each image to a different list
+    y = [0 if class0_name in addr else 1 for addr in list_of_images]
+
+    return X, y
+```
+
+Set the number of epochs, batch size, and architecture of RGB-CNN.
+
+epochs = 200
+
+batch_size = 32
+
+# CNN Architecture (RGB-CNN)
+
+model = Sequential([
+
+    Conv2D(16, (3, 3), activation='relu', input_shape=(pixel_size, pixel_size, 3)),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(32, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(64, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Conv2D(128, (3, 3), activation='relu'),
+
+    MaxPooling2D((2, 2)),
+
+    Dropout(0.1),
+
+    Flatten(),
+
+    Dropout(0.1),
+
+    Dense(128, activation='relu'),
+
+    Dense(64, activation='relu'),
+
+    Dense(1, activation='sigmoid')
+
+])
+
+# Clinical Data Normalization
+
+Select which columns to be normalized with the Min-max normalization
+
+columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
+
+# Define hyper-parameters for DeepFCM-PSO
+
+learning_rate = 0.01
+
+num_iterations = 20
+
+num_hidden_units = 30
+
+# Expert knowledge (if provided)
+
+If expert knowledge is provided in the form of fuzzy sets, the user must define the Excel file.
+
+suggested_weights = pd.read_excel("suggested_weights.xlsx", engine='openpyxl')
+
+# Usage
 
 To use DeepFCM-ELM, utilize the following code block:
 
@@ -32,23 +133,23 @@ def DeepFCM_ELM(initial_weights, num_iterations, input_features, learning_rate=0
         fcm_weights = constrain_weights(fcm_weights, initial_weights, lower_bounds, upper_bounds)
         input_weights = np.random.uniform(size=(num_hidden_units, num_dimensions - 1), low=-1, high=1)
         hidden_layer_output = np.dot(input_features[:, :-1], input_weights.T)  # Exclude the last column for input features
-      
+  
         # Add bias term to hidden layer output
         hidden_layer_output_with_bias = np.hstack((hidden_layer_output, np.ones((hidden_layer_output.shape[0], 1))))
-      
+  
         # Compute output weights using Moore-Penrose pseudoinverse
         output_weights = np.linalg.pinv(hidden_layer_output_with_bias).dot(training_real_output)
-      
+  
         elm_output, _ = elm_predict(input_features[:, :-1], input_weights, output_weights)  # Exclude the last column for input features
         current_mse = mse_loss_with_regularization(training_real_output, elm_output, fcm_weights, initial_weights, lambda_reg)
 
         if current_mse < best_mse:
             best_mse = current_mse
             best_weights = fcm_weights
-      
+  
         if current_mse < 0.8:
             break
-      
+  
         best_weights = fcm_weights + learning_rate * ((training_real_output - elm_output) * elm_output * (1 - elm_output)).T @ input_features[:, :-1]
 
     return best_fcm
@@ -61,8 +162,6 @@ This block of code will demonstrate the interconnections among concepts
 ```
 plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
 ```
-
-![Plot](assets/DeepFCM-ELM_CAD.jpg)
 
 Additionally, Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
 
@@ -93,7 +192,7 @@ for filename in os.listdir(data_dir):
             print("The model misclassified this instance as class1")
         else:
             print("The model predicted this instance as class2")
-          
+  
         if prediction == 0:
             predicted_class = 'class1'
             print("The model misclassified this instance as class1")
@@ -112,8 +211,8 @@ for filename in os.listdir(data_dir):
         # Convert images to RGB for display
         # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
-      
-      
+  
+  
         # Concatenate heatmap and original image side by side
         concatenated = np.concatenate((image, heatmap_rgb), axis=1)
 
