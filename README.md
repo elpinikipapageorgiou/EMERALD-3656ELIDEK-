@@ -1,4 +1,4 @@
-💡 EMERALD – Breakthrough Vision
+# EMERALD – Breakthrough Vision
 
 [**EMERALD**](https://emerald-project.eu) has introduced a novel, holistic approach to patient-specific predictive modeling and medical decision support system (MDSS) development. It integrates knowledge from clinical tests, electronic health records (EHR), and recent scientific research using advanced analytic techniques, creating a powerful foundation for personalized healthcare.
 
