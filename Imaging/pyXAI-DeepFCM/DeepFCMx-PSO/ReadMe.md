@@ -129,6 +129,73 @@ def DeepFCMx(dataset, num_dimensions, num_particles, maxiter):
 
 ```
 
+# Interpretation
+
+Grad-CAM provides interpretation of CNN predictions, highlighting critical regions that contribute to the model’s decision.
+For NSCLC diagnosis with CT images
+[https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html)
+For CAD diagnosis with Polar Maps images
+[https://www.mdpi.com/2076-3417/13/21/11953](https://www.mdpi.com/2076-3417/13/21/11953)
+
+
+```
+for filename in os.listdir(data_dir):
+    if any(filename.lower().endswith(ext) for ext in image_extensions):
+        file_path = os.path.join(data_dir, filename)
+        image = cv2.imread(file_path)
+        if image is None:
+            print(f"File not found or unable to read: {file_path}")
+            continue
+
+        print("Processing:", file_path)
+        if 'normal' in filename.lower():
+            actual_class = 'normal'
+        else:
+            actual_class = 'class1'
+        # Preprocess the image
+        image_resized = cv2.resize(image, (pixel_size, pixel_size))
+        image_resized = image_resized.astype('float32') / 255
+        image_resized = np.expand_dims(image_resized, axis=0)
+
+        # Predict the class
+        preds = model.predict(image_resized)
+        prediction = (preds > 0.5).astype(int)
+
+        if prediction == 0:
+            print("The model misclassified this instance as class1")
+        else:
+            print("The model predicted this instance as class2")
+        
+        if prediction == 0:
+            predicted_class = 'class1'
+            print("The model misclassified this instance as class1")
+        else:
+            predicted_class = 'class0'
+            print("The model predicted this instance as class0")
+
+        # Define the GradCAM instance with the manually set layer name
+        icam = GradCAM(model, np.argmax(preds[0]), layerName=last_conv_layer_name)
+        heatmap = icam.compute_heatmap(image_resized)
+        heatmap_resized = cv2.resize(heatmap, (pixel_size, pixel_size))
+
+        # Overlay the heatmap onto the original image
+        (heatmap, output) = icam.overlay_heatmap(heatmap_resized, image, alpha=0.5)
+
+        # Convert images to RGB for display
+        # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
+    
+    
+        # Concatenate heatmap and original image side by side
+        concatenated = np.concatenate((image, heatmap_rgb), axis=1)
+
+        # Save the concatenated image
+        output_filename = os.path.join(output_folder, f"gradcam_actual{actual_class}_pred_{predicted_class}_{os.path.splitext(filename)[0]}.png")
+        cv2.imwrite(output_filename, concatenated)
+
+        print(f"Saved concatenated image at: {output_filename}")
+```
+
 
 ## Dataset Description:
 
