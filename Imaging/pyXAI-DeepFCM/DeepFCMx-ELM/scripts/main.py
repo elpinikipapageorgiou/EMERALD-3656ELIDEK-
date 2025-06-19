@@ -32,6 +32,7 @@ import keras
 from compute_mean_values import compute_mean_deviations
 from suggested_weights_calculation import calculate_initial_weights
 from calculate_deviations_file import calculate_deviation
+from gradcam_file import GradCAM
 #--- MAIN ---------------------------------------------------------------------+
 
 
@@ -461,3 +462,75 @@ print("limits_fold")
 print(prec_deviation)
 
 compute_mean_deviations(num_dimensions, fold, column_names)
+
+
+####Grad-CAM methodology
+model = keras.models.load_model("model_rgb.keras")
+
+output_folder = 'gradcam_results'
+
+# Create the output folder if it does not exist
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+
+# List of common image extensions (Add the preffered extension)
+image_extensions = ['.tiff', '.tif', '.TIFF', '.jpeg', '.jpg', '.png']
+last_conv_layer_name = 'conv2d_2'  # Replace 'conv2d_2' with your actual last convolutional layer name
+
+# Iterate over all files in the directory that match the extensions
+
+for filename in os.listdir(image_paths):
+    if any(filename.lower().endswith(ext) for ext in image_extensions):
+        file_path = os.path.join(image_paths, filename)
+        image = cv2.imread(file_path)
+        if image is None:
+            print(f"File not found or unable to read: {file_path}")
+            continue
+
+        print("Processing:", file_path)
+        if class0_name in filename.lower():
+            actual_class = class0_name
+        else:
+            actual_class = class1_name
+        # Preprocess the image
+        image_resized = cv2.resize(image, (pixel_size, pixel_size))
+        image_resized = image_resized.astype('float32') / 255
+        image_resized = np.expand_dims(image_resized, axis=0)
+
+        # Predict the class
+        preds = model.predict(image_resized)
+        prediction = (preds > 0.5).astype(int)
+
+        if prediction == 0:
+            print("The model misclassified this instance as " + class0_name)
+        else:
+            print("The model predicted this instance as " + class1_name)
+            
+        if prediction == 0:
+            predicted_class = 'class1'
+            print("The model misclassified this instance as " + class1_name)
+        else:
+            predicted_class = class0_name
+            print("The model predicted this instance as" + class0_name)
+
+        # Define the GradCAM instance with the manually set layer name
+        icam = GradCAM(model, np.argmax(preds[0]), layerName=last_conv_layer_name)
+        heatmap = icam.compute_heatmap(image_resized)
+        heatmap_resized = cv2.resize(heatmap, (pixel_size, pixel_size))
+
+        # Overlay the heatmap onto the original image
+        (heatmap, output) = icam.overlay_heatmap(heatmap_resized, image, alpha=0.5)
+
+        # Convert images to RGB for display
+        # image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        heatmap_rgb = cv2.cvtColor(heatmap, cv2.COLOR_BGR2RGB)
+        
+        
+        # Concatenate heatmap and original image side by side
+        concatenated = np.concatenate((image, heatmap_rgb), axis=1)
+
+        # Save the concatenated image
+        output_filename = os.path.join(output_folder, f"gradcam_actual{actual_class}_pred_{predicted_class}_{os.path.splitext(filename)[0]}.png")
+        cv2.imwrite(output_filename, concatenated)
+
+        print(f"Saved concatenated image at: {output_filename}")
