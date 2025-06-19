@@ -23,6 +23,18 @@ To use RGB-CNN, pass the image directory to the data_dir parameter:
 ```
 data_dir = 'all_images/'
 ```
+
+# Set-up hyperparameters
+```
+# Batch size (should be a factor of 2.***4,8,16,32,64...***)
+batch_size = 16
+
+# Dropout rate
+drop_rate = 0.1
+ 
+# Number of epochs
+num_epochs = 300
+```
 # Usage
 To modify the RGB-CNN architecture, please add/remove the nodes and layers in the following block code:
 
