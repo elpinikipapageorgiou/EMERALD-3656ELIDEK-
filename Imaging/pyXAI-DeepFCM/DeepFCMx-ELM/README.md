@@ -130,13 +130,6 @@ def DeepFCMxELM(initial_weights, num_iterations, input_features, learning_rate=0
 
 ```
 
-# Interpretation
-
-This block of code will demonstrate the interconnections among concepts
-
-```
-plot_FCM_weight_matrix_graph(column_names, last_column_except_last)
-```
 
 # Interpretation
 
