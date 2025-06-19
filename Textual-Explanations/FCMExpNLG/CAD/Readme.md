@@ -1,4 +1,4 @@
-# FCMExpNLG
+# FCMExpNLG - Application to CAD
 
 # FCM-Based Clinical Decision Support System for CAD Diagnosis
 
