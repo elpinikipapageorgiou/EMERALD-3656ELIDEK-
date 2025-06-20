@@ -17,15 +17,12 @@ num_clusters= 3
 # To set the path of the imaging folder
 
 Ensure that your images have one of the following extensions
-
-```
-extensions = ['jpg', 'png', 'jpeg', 'tiff', '.tif','.TIFF', '.TIF']
-```
-
 Set the path to the image folder.
 ```
-for ext in extensions:
-    path_pattern = f"all_images/*.{ext}"
+data_dir = 'all_images/'
+
+image_paths = [os.path.join(data_dir, file) for file in os.listdir(data_dir) if file.lower().endswith(('.tif', '.tiff', '.jpeg', '.png'))]
+addrs=image_paths
 ```
 # Set the output names
 Set the names of output classes
