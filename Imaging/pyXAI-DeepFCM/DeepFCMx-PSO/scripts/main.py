@@ -34,16 +34,11 @@ num_clusters= 3
 
 print("training procedure")
 
-#Available extensions
-extensions = ['jpg', 'png', 'jpeg', 'tiff', '.tif','.TIFF', '.TIF']
+data_dir = 'all_images/'
 
-# Get a list of file paths that match the updated pattern for each extension
-image_paths = []
-for ext in extensions:
-    path_pattern = f"all_images/*.{ext}"
-    image_paths.extend(glob.glob(path_pattern, recursive=True))
-# print(len(image_paths))
+image_paths = [os.path.join(data_dir, file) for file in os.listdir(data_dir) if file.lower().endswith(('.tif', '.tiff', '.jpeg', '.png'))]
 addrs=image_paths
+
 
 
 
@@ -456,9 +451,9 @@ last_conv_layer_name = 'conv2d_2'  # Replace 'conv2d_2' with your actual last co
 
 # Iterate over all files in the directory that match the extensions
 
-for filename in os.listdir(image_paths):
+for filename in os.listdir(data_dir):
     if any(filename.lower().endswith(ext) for ext in image_extensions):
-        file_path = os.path.join(image_paths, filename)
+        file_path = os.path.join(data_dir, filename)
         image = cv2.imread(file_path)
         if image is None:
             print(f"File not found or unable to read: {file_path}")
