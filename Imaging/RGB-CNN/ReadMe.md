@@ -23,6 +23,11 @@ To use RGB-CNN, pass the image directory to the data_dir parameter:
 ```
 data_dir = 'all_images/'
 ```
+Change the name of your output classes 
+```
+class0_name='class0'
+class1_name='class1'
+```
 
 # Set-up hyperparameters
 ```
