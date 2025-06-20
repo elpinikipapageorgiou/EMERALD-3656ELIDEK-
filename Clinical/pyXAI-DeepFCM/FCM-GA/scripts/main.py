@@ -69,8 +69,6 @@ cm_sum=[]
 sens=[]
 spec=[]
 
-#define number of iterations
-num_iterations=15
 
 #K-fold cross validation
 kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
