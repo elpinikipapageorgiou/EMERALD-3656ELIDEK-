@@ -23,8 +23,8 @@ from keras.preprocessing.image import ImageDataGenerator
 #import functions
 from gradcam_file import GradCAM
 
-class0_name='normal'
-class1_name='pathological'
+class0_name='class0'
+class1_name='class1'
 ##Pixel Size
 #Define pixel size for rows and columns
 
