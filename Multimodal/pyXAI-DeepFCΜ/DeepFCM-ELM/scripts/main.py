@@ -204,7 +204,7 @@ excel_dataset=pd.read_excel("dataset.xlsx", engine='openpyxl')
 
 # # apply normalization techniques by Column
 #How to apply normalization to the columns Age and BMI
-columns_to_normalize = ['AGE', 'BMI']  # Add any other columns you need to normalize
+columns_to_normalize = ['column1', 'column2']  # Add any other columns you need to normalize
 
 for column in columns_to_normalize:
     excel_dataset[column] = (excel_dataset[column] - excel_dataset[column].min()) / (excel_dataset[column].max() - excel_dataset[column].min())
