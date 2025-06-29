@@ -1,4 +1,9 @@
 # DeepFCM-GA
+This is the official implementation of
+[https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html)
+
+# Paper Abstract
+Non-small cell lung cancer is a prevalent form of lung cancer, with Solitary Pulmonary Nodules (SPNs) as a key indicator. Early detection and accurate diagnosis are critical for effective treatment. While Convolutional Neural Networks (CNNs) have been successful in diagnosing SPNs from Computed Tomography (CT) and Positron Emission Tomography (PET) imaging, they lack explainability. To address this, we applied DeepFCM, a multimodal approach that combines Fuzzy Cognitive Maps (FCMs) with CNNs, integrating clinical and PET imaging data to predict SPN malignancy. Clinical data include patient characteristics (i.e., gender, age, Body Mass Index, Glucose Levels) and SPN characteristics (diameter, Standardized Uptake Value (SUV)max, location, type, and margins). Predictions from the RGB-CNN, trained on PET images, are used as additional inputs for DeepFCM. Initially defined by nuclear experts using fuzzy sets, concept interconnections were adapted with Particle Swarm Optimization (PSO) and Genetic Algorithm (GA). DeepFCM is integrated into a Medical Decision Support System (MDSS) to enable data-driven predictions for NSCLC. To improve explainability, Gradient-weighted Class Activation Mapping (Grad-CAM) highlights significant image regions, while DeepFCM illustrates the relationships between each feature to NSCLC diagnosis. Natural Language Generation (NLG) is applied to explain the DeepFCM decision-making process by demonstrating each feature's impact on the diagnosis in human-understandable language.
 
 # Multimodal approach (Clinical + Imaging Data)
 
