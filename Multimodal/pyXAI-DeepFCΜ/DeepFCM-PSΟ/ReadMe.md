@@ -44,7 +44,7 @@ epochs = 200
 batch_size = 32
 
 # CNN Architecture (RGB-CNN)
-
+```
 model = Sequential([
 
     Conv2D(16, (3, 3), activation='relu', input_shape=(pixel_size, pixel_size, 3)),
@@ -88,7 +88,7 @@ model = Sequential([
     Dense(1, activation='sigmoid')
 
 ])
-
+```
 # Clinical Data Normalization
 
 Select which columns to be normalized with the Min-max normalization
