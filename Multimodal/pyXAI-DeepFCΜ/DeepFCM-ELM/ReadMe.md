@@ -1,5 +1,11 @@
 # DeepFCM-ELM
 
+This is the official implementation of
+[https://dl.acm.org/doi/full/10.1145/3716554.3716615](https://dl.acm.org/doi/full/10.1145/3716554.3716615)
+
+# Paper Abstract
+Early detection of Coronary Artery Disease (CAD) and Non-Small Cell Lung Cancer (NSCLC) is crucial for improving patient outcomes. In this study, RGB-CNN (Convolutional Neural Network) was implemented, and trained from scratch using Polar Maps for CAD diagnosis and Computed Tomography (CT) images for NSCLC diagnosis. The CNN predictions were then integrated with clinical data into a Fuzzy Cognitive Map (FCM) classifier for each type of diagnosis. Nuclear medicine experts provided linguistic values in the form of fuzzy sets to define the relationships between input and output concepts, which were later converted into interval values. Extreme Learning Machine (ELM) and Genetic Algorithm (GA) were applied to the FCM learning process to refine the interconnections based on expert knowledge. To ensure the robustness of the results, 10-fold cross-validation was employed. The DeepFCM-ELM model demonstrated superior performance, achieving 80.4%±4.97% accuracy for CAD diagnosis, and 91.9%±3.07% for NSCLC diagnosis using CT images. Heatmaps were generated to interpret CNN predictions by highlighting pathological regions. These heatmaps were then used in GPT, along with DeepFCM weights, CNN, and DeepFCM prediction and input clinical values, employing Natural Language Generation to translate DeepFCM results into human-readable language, enhancing the model's overall explainability. All these techniques have been integrated into a Medical Decision Support System (MDSS) designed to effectively manage both medical classification challenges.
+
 # Multimodal approach (Clinical + Imaging Data)
 
 This multimodal approach enhances interpretability by integrating both clinical and imaging data, providing a transparent view of interconnections and their contributions to DeepFCM's predictive accuracy.
