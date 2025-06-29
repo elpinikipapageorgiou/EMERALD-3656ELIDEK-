@@ -8,7 +8,7 @@ This is the official implementation of
 
 [https://ieeexplore.ieee.org/abstract/document/10345912](https://ieeexplore.ieee.org/abstract/document/10345912)
 
-[https://ieeexplore.ieee.org/abstract/document/10786612](https://ieeexplore.ieee.org/abstract/document/10786612)
+[https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html](https://www.thinkmind.org/library/EXPLAINABILITY/EXPLAINABILITY_2024/explainability_2024_1_60_10032.html)
 
 # Paper Abstract
 
