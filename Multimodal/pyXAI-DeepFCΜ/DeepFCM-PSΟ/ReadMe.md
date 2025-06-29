@@ -3,8 +3,12 @@
 This is the official implementation of
 
 [https://doi.org/10.3390/app132111953](https://doi.org/10.3390/app132111953),
+
 [https://doi.org/10.1007/978-3-031-39965-7_2](https://doi.org/10.1007/978-3-031-39965-7_2),
-[https://ieeexplore.ieee.org/abstract/document/10345912]()
+
+[https://ieeexplore.ieee.org/abstract/document/10345912](https://ieeexplore.ieee.org/abstract/document/10345912)
+
+[https://ieeexplore.ieee.org/abstract/document/10786612](https://ieeexplore.ieee.org/abstract/document/10786612)
 
 # Paper Abstract
 
