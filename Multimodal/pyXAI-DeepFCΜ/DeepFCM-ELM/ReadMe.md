@@ -25,16 +25,7 @@ pixel_size = 300
 Ensure that your images have one of the following extensions
 
 ```
-def read_and_process_image(list_of_images):
-    X = []
-    for img in list_of_images:
-        image = cv2.imread(img)
-        X.append(cv2.resize(image, (pixel_size, pixel_size), interpolation=cv2.INTER_CUBIC))
-
-    # Define the output of each image to a different list
-    y = [0 if class0_name in addr else 1 for addr in list_of_images]
-
-    return X, y
+image_files = [os.path.join(data_dir, file) for file in os.listdir(data_dir) if file.lower().endswith(('.tif', '.tiff', '.jpeg', '.png'))]
 ```
 
 Set the number of epochs, batch size, and architecture of RGB-CNN.
@@ -44,7 +35,7 @@ epochs = 200
 batch_size = 32
 
 # CNN Architecture (RGB-CNN)
-
+```
 model = Sequential([
 
     Conv2D(16, (3, 3), activation='relu', input_shape=(pixel_size, pixel_size, 3)),
@@ -88,7 +79,7 @@ model = Sequential([
     Dense(1, activation='sigmoid')
 
 ])
-
+```
 # Clinical Data Normalization
 
 Select which columns to be normalized with the Min-max normalization
