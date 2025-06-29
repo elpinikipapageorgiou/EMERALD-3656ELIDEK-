@@ -111,7 +111,7 @@ folds=10
 
 # Expert knowledge (if provided)
 
-If expert knowledge is provided in the form of fuzzy sets, the user must define the Excel file.
+If expert knowledge is provided in the form of fuzzy sets, the user must define the Excel file. Else leave it equal to None.
 
 suggested_weights = pd.read_excel("suggested_weights.xlsx", engine='openpyxl')
 
